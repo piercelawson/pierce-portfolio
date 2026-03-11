@@ -74,12 +74,12 @@
 
   /* Exit: columns grow up */
   body.is-transitioning .page-transition .col {
-    animation: colUp 0.5s var(--ease-out) forwards;
+    animation: colUp 0.35s var(--ease-out) forwards;
   }
-  body.is-transitioning .page-transition .col:nth-child(2) { animation-delay: 0.06s; }
-  body.is-transitioning .page-transition .col:nth-child(3) { animation-delay: 0.12s; }
-  body.is-transitioning .page-transition .col:nth-child(4) { animation-delay: 0.18s; }
-  body.is-transitioning .page-transition .col:nth-child(5) { animation-delay: 0.24s; }
+  body.is-transitioning .page-transition .col:nth-child(2) { animation-delay: 0.04s; }
+  body.is-transitioning .page-transition .col:nth-child(3) { animation-delay: 0.08s; }
+  body.is-transitioning .page-transition .col:nth-child(4) { animation-delay: 0.12s; }
+  body.is-transitioning .page-transition .col:nth-child(5) { animation-delay: 0.16s; }
 
   @keyframes colUp {
     0%   { transform: scaleY(0); transform-origin: bottom; }
@@ -90,12 +90,12 @@
   body.is-entering .page-transition .col {
     transform: scaleY(1);
     transform-origin: top;
-    animation: colDown 0.5s var(--ease-out) forwards;
+    animation: colDown 0.35s var(--ease-out) forwards;
   }
-  body.is-entering .page-transition .col:nth-child(2) { animation-delay: 0.06s; }
-  body.is-entering .page-transition .col:nth-child(3) { animation-delay: 0.12s; }
-  body.is-entering .page-transition .col:nth-child(4) { animation-delay: 0.18s; }
-  body.is-entering .page-transition .col:nth-child(5) { animation-delay: 0.24s; }
+  body.is-entering .page-transition .col:nth-child(2) { animation-delay: 0.04s; }
+  body.is-entering .page-transition .col:nth-child(3) { animation-delay: 0.08s; }
+  body.is-entering .page-transition .col:nth-child(4) { animation-delay: 0.12s; }
+  body.is-entering .page-transition .col:nth-child(5) { animation-delay: 0.16s; }
 
   @keyframes colDown {
     0%   { transform: scaleY(1); transform-origin: top; }
@@ -105,7 +105,7 @@
   /* Page content fades in */
   .page-content {
     opacity: 0;
-    animation: contentIn 0.6s ease 0.4s forwards;
+    animation: contentIn 0.4s ease 0.25s forwards;
   }
 
   @keyframes contentIn {
@@ -120,38 +120,47 @@
     top: 0;
     width: 100%;
     z-index: 100;
-    padding: 1.5rem 3rem;
+    padding: 1.2rem 3rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
     mix-blend-mode: difference;
+    transition: padding 0.3s ease;
+  }
+
+  nav.scrolled {
+    padding-top: 0.8rem;
+    padding-bottom: 0.8rem;
   }
 
   .nav-logo {
     font-family: var(--serif);
-    font-size: 1.4rem;
+    font-size: 1.5rem;
     color: var(--text);
     text-decoration: none;
     letter-spacing: -0.02em;
+    transition: opacity 0.3s;
   }
 
+  .nav-logo:hover { opacity: 0.7; }
   .nav-logo span { color: var(--accent); }
 
   .nav-links {
     display: flex;
     gap: 2.5rem;
     list-style: none;
+    align-items: center;
   }
 
   .nav-links a {
     color: var(--text);
     text-decoration: none;
-    font-size: 0.85rem;
+    font-size: 0.78rem;
     font-weight: 400;
-    letter-spacing: 0.08em;
+    letter-spacing: 0.1em;
     text-transform: uppercase;
     position: relative;
-    padding-bottom: 2px;
+    padding-bottom: 4px;
   }
 
   .nav-links a::after {
@@ -165,6 +174,7 @@
 
   .nav-links a:hover::after { width: 100%; }
 
+  /* ─── Hamburger → X toggle ─── */
   .menu-toggle {
     display: none;
     background: none;
@@ -172,15 +182,39 @@
     cursor: pointer;
     padding: 0.5rem;
     z-index: 200;
+    width: 36px;
+    height: 36px;
+    position: relative;
   }
 
   .menu-toggle span {
     display: block;
     width: 24px;
-    height: 1.5px;
+    height: 2px;
     background: var(--text);
-    margin: 6px 0;
-    transition: all 0.3s;
+    position: absolute;
+    left: 6px;
+    transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+                opacity 0.25s ease,
+                top 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .menu-toggle span:nth-child(1) { top: 9px; }
+  .menu-toggle span:nth-child(2) { top: 17px; }
+  .menu-toggle span:nth-child(3) { top: 25px; }
+
+  /* X state */
+  .menu-toggle.active span:nth-child(1) {
+    top: 17px;
+    transform: rotate(45deg);
+  }
+  .menu-toggle.active span:nth-child(2) {
+    opacity: 0;
+    transform: scaleX(0);
+  }
+  .menu-toggle.active span:nth-child(3) {
+    top: 17px;
+    transform: rotate(-45deg);
   }
 
   /* ═══════════════════════════════════════
@@ -258,7 +292,7 @@
      RESPONSIVE
      ═══════════════════════════════════════ */
   @media (max-width: 900px) {
-    nav { padding: 1.2rem 1.5rem; }
+    nav { padding: 1rem 1.5rem; }
     .nav-links { gap: 1.5rem; }
     footer {
       flex-direction: column;
@@ -269,19 +303,39 @@
   }
 
   @media (max-width: 600px) {
-    .nav-links { display: none; }
-    .nav-links.show {
-      display: flex;
+    .nav-links {
+      position: fixed;
+      inset: 0;
+      background: rgba(10, 10, 10, 0.97);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
       flex-direction: column;
-      position: absolute;
-      top: 100%;
-      right: 0;
-      background: var(--bg-elevated);
-      padding: 2rem;
-      border: 1px solid var(--border);
-      gap: 1.2rem;
-      min-width: 200px;
+      justify-content: center;
+      align-items: center;
+      gap: 2rem;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.35s ease, visibility 0.35s ease;
+      z-index: 150;
     }
+    .nav-links.show {
+      opacity: 1;
+      visibility: visible;
+    }
+    .nav-links a {
+      font-size: 1.4rem;
+      letter-spacing: 0.12em;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.3s ease, transform 0.3s ease, color 0.3s;
+    }
+    .nav-links.show a {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .nav-links.show li:nth-child(1) a { transition-delay: 0.08s; }
+    .nav-links.show li:nth-child(2) a { transition-delay: 0.16s; }
+    .nav-links.show li:nth-child(3) a { transition-delay: 0.24s; }
     .menu-toggle { display: block; }
   }
 </style>
@@ -305,7 +359,7 @@
     <li><a href="/#about" class="transition-link">About</a></li>
     <li><a href="/#contact" class="transition-link">Contact</a></li>
   </ul>
-  <button class="menu-toggle" aria-label="Toggle menu" onclick="document.querySelector('.nav-links').classList.toggle('show')">
+  <button class="menu-toggle" aria-label="Toggle menu">
     <span></span><span></span><span></span>
   </button>
 </nav>
@@ -327,10 +381,28 @@
 <script>
   // ─── PAGE TRANSITIONS ───
   (function() {
-    // Remove enter class after animation
-    setTimeout(() => {
-      document.body.classList.remove('is-entering');
-    }, 800);
+    function clearTransitionState() {
+      document.body.classList.remove('is-entering', 'is-transitioning');
+      // Ensure content is visible
+      var pc = document.querySelector('.page-content');
+      if (pc) pc.style.opacity = '1';
+    }
+
+    // Remove enter class after animation completes
+    setTimeout(clearTransitionState, 500);
+
+    // Handle browser back/forward button (bfcache)
+    window.addEventListener('pageshow', function(e) {
+      if (e.persisted) {
+        // Page was restored from bfcache — clear stuck transition
+        clearTransitionState();
+      }
+    });
+
+    // Also handle popstate for SPA-like back navigation
+    window.addEventListener('popstate', function() {
+      clearTransitionState();
+    });
 
     // Intercept all transition links
     document.addEventListener('click', function(e) {
@@ -338,17 +410,55 @@
       if (!link) return;
 
       const href = link.getAttribute('href');
-      // Skip if same-page anchor
       if (href.startsWith('#')) return;
-      // Skip if hash link on current page
       if (href.startsWith('/#') && window.location.pathname === '/') return;
 
       e.preventDefault();
+
+      // Close mobile menu if open
+      document.querySelector('.nav-links').classList.remove('show');
+      document.querySelector('.menu-toggle').classList.remove('active');
+
       document.body.classList.add('is-transitioning');
 
       setTimeout(() => {
         window.location.href = href;
-      }, 600);
+      }, 400);
+    });
+  })();
+
+  // ─── HAMBURGER TOGGLE ───
+  (function() {
+    const toggle = document.querySelector('.menu-toggle');
+    const navLinks = document.querySelector('.nav-links');
+    if (!toggle || !navLinks) return;
+
+    toggle.addEventListener('click', function() {
+      toggle.classList.toggle('active');
+      navLinks.classList.toggle('show');
+    });
+
+    // Close menu when a link is clicked
+    navLinks.querySelectorAll('a').forEach(function(link) {
+      link.addEventListener('click', function() {
+        toggle.classList.remove('active');
+        navLinks.classList.remove('show');
+      });
+    });
+  })();
+
+  // ─── NAV SCROLL SHRINK ───
+  (function() {
+    var nav = document.querySelector('nav');
+    var scrolled = false;
+    window.addEventListener('scroll', function() {
+      if (window.scrollY > 50 && !scrolled) {
+        nav.classList.add('scrolled');
+        scrolled = true;
+      } else if (window.scrollY <= 50 && scrolled) {
+        nav.classList.remove('scrolled');
+        scrolled = false;
+      }
     });
   })();
 
