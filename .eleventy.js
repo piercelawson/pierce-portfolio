@@ -25,4 +25,19 @@ module.exports = function(eleventyConfig) {
   });
 
   // Markdown filter for rendering markdown strings in templates
-  const md = markdownIt({ html: true, b
+  const md = markdownIt({ html: true, breaks: true, linkify: true });
+  eleventyConfig.addFilter("md", function(content) {
+    if (!content) return "";
+    return md.render(content);
+  });
+
+  return {
+    dir: {
+      input: "src",
+      includes: "_includes",
+      output: "_site"
+    },
+    markdownTemplateEngine: "njk",
+    htmlTemplateEngine: "njk"
+  };
+};
