@@ -5,8 +5,8 @@ title: AW Broadband
 category: Brand Campaign
 client: AW Broadband
 year: "2025"
-thumbnail: /assets/img/preview-10-.webp
-hero_image: /assets/img/preview-10-.webp
+thumbnail: https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/1280px-Image_created_with_a_mobile_phone.png
+hero_image: https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/1280px-Image_created_with_a_mobile_phone.png
 video_url: ""
 gallery:
   - image: /assets/img/aa006.jpg
