@@ -24,12 +24,6 @@ module.exports = function(eleventyConfig) {
       .sort((a, b) => (a.data.order || 999) - (b.data.order || 999));
   });
 
-  // Split filter for splitting strings
-  eleventyConfig.addFilter("split", function(str, sep) {
-    if (!str) return [];
-    return str.split(sep);
-  });
-
   // Markdown filter for rendering markdown strings in templates
   const md = markdownIt({ html: true, breaks: true, linkify: true });
   eleventyConfig.addFilter("md", function(content) {
