@@ -1,48 +1,54 @@
 ---
+project_type: video
 layout: project.njk
-title: "Kelly Roofing"
-category: "Commercial"
-project_type: "video"
-client: "Kelly Roofing"
+title: Kelly Roofing
+category: Commercial
+client: Kelly Roofing
 year: "2025"
-thumbnail: ""
+thumbnail: /assets/img/aa006.jpg
 hero_image: ""
-video_url: ""
+video_url: https://youtu.be/GFGH0zwp6mk?si=pGfZtTjpubQ7ueb6
 gallery: []
-description: "A commercial campaign built to drive leads and establish brand authority for a regional roofing company."
+description: A commercial campaign built to drive leads and establish brand
+  authority for a regional roofing company.
+process:
+  - caption: Discovery & Concept
+    text: Started with the client's core differentiators — reliability, local
+      reputation, and craftsmanship. Developed a creative brief focused on
+      authentic visuals over stock-footage clichés.
+    media_type: image
+    image: ""
+    video_file: ""
+    video_poster: ""
+    layout: full
+  - caption: Location Scouting
+    text: Identified neighborhoods and active job sites that would give us the most
+      visually compelling backdrops while keeping production lean.
+    media_type: image
+    image: ""
+    video_file: ""
+    video_poster: ""
+    layout: half
+  - caption: Shoot Day
+    text: One-day shoot covering crew work, detail shots, and establishing
+      exteriors. Natural light, minimal gear, maximum efficiency.
+    media_type: image
+    image: ""
+    video_file: ""
+    video_poster: ""
+    layout: half
+  - caption: Edit & Color
+    text: Cut for pace — designed to hold attention in a scroll-heavy environment.
+      Color graded to feel warm and trustworthy without being saccharine.
+    media_type: video
+    image: ""
+    video_file: ""
+    video_poster: ""
+    layout: full
 order: 1
 featured: true
 tags:
   - project
-process:
-  - caption: "Discovery & Concept"
-    text: "Started with the client's core differentiators — reliability, local reputation, and craftsmanship. Developed a creative brief focused on authentic visuals over stock-footage clichés."
-    media_type: "image"
-    image: ""
-    video_file: ""
-    video_poster: ""
-    layout: "full"
-  - caption: "Location Scouting"
-    text: "Identified neighborhoods and active job sites that would give us the most visually compelling backdrops while keeping production lean."
-    media_type: "image"
-    image: ""
-    video_file: ""
-    video_poster: ""
-    layout: "half"
-  - caption: "Shoot Day"
-    text: "One-day shoot covering crew work, detail shots, and establishing exteriors. Natural light, minimal gear, maximum efficiency."
-    media_type: "image"
-    image: ""
-    video_file: ""
-    video_poster: ""
-    layout: "half"
-  - caption: "Edit & Color"
-    text: "Cut for pace — designed to hold attention in a scroll-heavy environment. Color graded to feel warm and trustworthy without being saccharine."
-    media_type: "video"
-    image: ""
-    video_file: ""
-    video_poster: ""
-    layout: "full"
 ---
 
 ## The Brief
