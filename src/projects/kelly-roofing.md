@@ -7,7 +7,11 @@ client: Kelly Roofing
 year: "2025"
 thumbnail: /assets/img/aa006.jpg
 hero_image: ""
-video_url: https://youtu.be/GFGH0zwp6mk?si=pGfZtTjpubQ7ueb6
+video_url: <iframe width="560" height="315"
+  src="https://www.youtube.com/embed/GFGH0zwp6mk?si=pGfZtTjpubQ7ueb6"
+  title="YouTube video player" frameborder="0" allow="accelerometer; autoplay;
+  clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+  referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 gallery: []
 description: A commercial campaign built to drive leads and establish brand
   authority for a regional roofing company.
