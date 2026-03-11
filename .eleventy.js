@@ -5,6 +5,11 @@ module.exports = function(eleventyConfig) {
   eleventyConfig.addPassthroughCopy("src/admin");
   eleventyConfig.addPassthroughCopy("src/assets");
 
+  // Add the missing "split" filter
+  eleventyConfig.addFilter("split", function(str, sep) {
+    return (str || "").split(sep);
+  });
+
   // All projects sorted by order
   eleventyConfig.addCollection("projects", function(collectionApi) {
     return collectionApi.getFilteredByGlob("src/projects/*.md").sort((a, b) => {
@@ -20,19 +25,4 @@ module.exports = function(eleventyConfig) {
   });
 
   // Markdown filter for rendering markdown strings in templates
-  const md = markdownIt({ html: true, breaks: true, linkify: true });
-  eleventyConfig.addFilter("md", function(content) {
-    if (!content) return "";
-    return md.render(content);
-  });
-
-  return {
-    dir: {
-      input: "src",
-      includes: "_includes",
-      output: "_site"
-    },
-    markdownTemplateEngine: "njk",
-    htmlTemplateEngine: "njk"
-  };
-};
+  const md = markdownIt({ html: true, b
