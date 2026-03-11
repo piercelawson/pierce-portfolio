@@ -1,0 +1,366 @@
+---
+layout: base.njk
+permalink: /
+---
+
+{% block head %}
+<style>
+  /* ═══════════════════════════════════════
+     HERO
+     ═══════════════════════════════════════ */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 6rem 2rem 4rem;
+    position: relative;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(201,255,87,0.06) 0%, transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
+    animation: pulse 6s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.6; }
+    50% { transform: translate(-50%, -50%) scale(1.15); opacity: 1; }
+  }
+
+  .hero-tag {
+    font-size: 0.75rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 2rem;
+    animation: fadeUp 0.8s ease both 0.5s;
+  }
+
+  .hero h1 {
+    font-family: var(--serif);
+    font-size: clamp(3rem, 8vw, 7rem);
+    font-weight: 400;
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+    max-width: 900px;
+    animation: fadeUp 0.8s ease both 0.7s;
+  }
+
+  .hero h1 em { font-style: italic; color: var(--accent); }
+
+  .hero-sub {
+    margin-top: 2rem;
+    font-size: 1.1rem;
+    color: var(--text-muted);
+    max-width: 480px;
+    animation: fadeUp 0.8s ease both 0.9s;
+  }
+
+  .hero-cta {
+    margin-top: 3rem;
+    animation: fadeUp 0.8s ease both 1.1s;
+  }
+
+  /* Scroll hint */
+  .scroll-hint {
+    position: absolute;
+    bottom: 2.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--text-muted);
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    animation: fadeUp 0.8s ease both 1.4s;
+  }
+
+  .scroll-hint .scroll-line {
+    width: 1px;
+    height: 40px;
+    background: linear-gradient(to bottom, var(--accent), transparent);
+    animation: scrollPulse 2s ease-in-out infinite;
+  }
+
+  @keyframes scrollPulse {
+    0%, 100% { opacity: 0.3; transform: scaleY(0.7); }
+    50% { opacity: 1; transform: scaleY(1); }
+  }
+
+  /* ═══════════════════════════════════════
+     ABOUT
+     ═══════════════════════════════════════ */
+  .about {
+    padding: 8rem 3rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1.4fr;
+    gap: 6rem;
+    align-items: start;
+  }
+
+  .about-label {
+    font-size: 0.7rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1.5rem;
+  }
+
+  .about-headline {
+    font-family: var(--serif);
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+  }
+
+  .about-headline em { font-style: italic; color: var(--accent); }
+
+  .about-text {
+    color: var(--text-muted);
+    font-size: 1.05rem;
+    line-height: 1.75;
+  }
+
+  .about-text p { margin-bottom: 1.5rem; }
+  .about-text strong { color: var(--text); font-weight: 500; }
+
+  /* ═══════════════════════════════════════
+     WORK GRID
+     ═══════════════════════════════════════ */
+  .work {
+    padding: 6rem 3rem 8rem;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  .section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 4rem;
+  }
+
+  .section-header h2 {
+    font-family: var(--serif);
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 400;
+    letter-spacing: -0.02em;
+  }
+
+  .project-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+
+  .project-card {
+    position: relative;
+    aspect-ratio: 4/3;
+    overflow: hidden;
+    cursor: pointer;
+    text-decoration: none;
+    color: inherit;
+    display: block;
+  }
+
+  .project-card .thumb {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s var(--ease-out), filter 0.6s ease;
+    filter: grayscale(30%) brightness(0.85);
+  }
+
+  .project-card:hover .thumb {
+    transform: scale(1.06);
+    filter: grayscale(0%) brightness(1);
+  }
+
+  .thumb-placeholder {
+    width: 100%; height: 100%;
+    background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460);
+  }
+
+  .project-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(10,10,10,0.9) 0%, rgba(10,10,10,0.1) 50%, transparent 100%);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 1.8rem;
+    transition: background 0.4s ease;
+  }
+
+  .project-card:hover .project-overlay {
+    background: linear-gradient(to top, rgba(10,10,10,0.95) 0%, rgba(10,10,10,0.3) 60%, transparent 100%);
+  }
+
+  .project-category {
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.4rem;
+    opacity: 0;
+    transform: translateY(8px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+  }
+
+  .project-card:hover .project-category {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .project-title {
+    font-family: var(--serif);
+    font-size: 1.4rem;
+    letter-spacing: -0.01em;
+    transform: translateY(4px);
+    transition: transform 0.3s ease;
+  }
+
+  .project-card:hover .project-title {
+    transform: translateY(0);
+  }
+
+  /* ═══════════════════════════════════════
+     CONTACT
+     ═══════════════════════════════════════ */
+  .contact {
+    padding: 8rem 3rem;
+    text-align: center;
+    background: var(--bg-elevated);
+    border-top: 1px solid var(--border);
+  }
+
+  .contact-label {
+    font-size: 0.7rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1.5rem;
+  }
+
+  .contact h2 {
+    font-family: var(--serif);
+    font-size: clamp(2.5rem, 6vw, 5rem);
+    font-weight: 400;
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+    margin-bottom: 1.5rem;
+  }
+
+  .contact h2 em { font-style: italic; color: var(--accent); }
+
+  .contact p {
+    color: var(--text-muted);
+    font-size: 1.1rem;
+    max-width: 520px;
+    margin: 0 auto 2.5rem;
+  }
+
+  /* ═══════════════════════════════════════
+     RESPONSIVE
+     ═══════════════════════════════════════ */
+  @media (max-width: 900px) {
+    .about {
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+      padding: 5rem 1.5rem;
+    }
+    .work { padding: 4rem 1.5rem 6rem; }
+    .project-grid { grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+    .contact { padding: 5rem 1.5rem; }
+  }
+
+  @media (max-width: 600px) {
+    .project-grid { grid-template-columns: 1fr; }
+    .hero { padding: 5rem 1.5rem 3rem; }
+    .scroll-hint { display: none; }
+  }
+</style>
+{% endblock %}
+
+<!-- ═══ HERO ═══ -->
+<section class="hero" id="home">
+  <div class="hero-tag">{{ settings.tagline }}</div>
+  <h1>{{ settings.hero_headline | replace("Story", "<em>Story</em>") | safe }}</h1>
+  <p class="hero-sub">{{ settings.hero_sub }}</p>
+  <div class="hero-cta">
+    <a href="mailto:{{ settings.email }}?subject=Let's%20Work%20Together" class="btn">
+      Let's Talk
+      <svg class="arrow-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </a>
+  </div>
+  <div class="scroll-hint">
+    <span>Scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- ═══ ABOUT ═══ -->
+<section class="about reveal" id="about">
+  <div>
+    <div class="about-label">About</div>
+    <h3 class="about-headline">Good creative work doesn't just look right — it <em>works</em>.</h3>
+  </div>
+  <div class="about-text">
+    {{ settings.about_text | md | safe }}
+  </div>
+</section>
+
+<!-- ═══ WORK GRID ═══ -->
+<section class="work" id="work">
+  <div class="section-header reveal">
+    <h2>Selected Work</h2>
+  </div>
+
+  <div class="project-grid">
+    {%- set gradients = [
+      "linear-gradient(135deg, #1a1a2e, #16213e, #0f3460)",
+      "linear-gradient(135deg, #2d1b2e, #1b1b2f, #0d2137)",
+      "linear-gradient(135deg, #1a2a1a, #0f1f2e, #1a1a2e)",
+      "linear-gradient(135deg, #2e1a1a, #2e1f0f, #2e2a1a)",
+      "linear-gradient(135deg, #0f1a2e, #1a0f2e, #2e1a2a)",
+      "linear-gradient(135deg, #1a1a1a, #2a2a2a, #1a2a3a)"
+    ] -%}
+    {%- for project in collections.projects -%}
+    <a href="{{ project.url }}" class="project-card reveal transition-link" style="transition-delay: {{ loop.index0 * 0.08 }}s">
+      {% if project.data.thumbnail %}
+        <img class="thumb" src="{{ project.data.thumbnail }}" alt="{{ project.data.title }}" loading="lazy">
+      {% else %}
+        <div class="thumb thumb-placeholder" style="background: {{ gradients[loop.index0 % 6] }};"></div>
+      {% endif %}
+      <div class="project-overlay">
+        <div class="project-category">{{ project.data.category }}</div>
+        <div class="project-title">{{ project.data.title }}</div>
+      </div>
+    </a>
+    {%- endfor -%}
+  </div>
+</section>
+
+<!-- ═══ CONTACT ═══ -->
+<section class="contact reveal" id="contact">
+  <div class="contact-label">Get in Touch</div>
+  <h2>Got something to<br><em>communicate?</em></h2>
+  <p>Whether you're scoping a project or just want to talk shop — I'd love to hear from you.</p>
+  <a href="mailto:{{ settings.email }}?subject=Let's%20Work%20Together" class="btn">
+    Start a Conversation
+    <svg class="arrow-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+  </a>
+</section>
