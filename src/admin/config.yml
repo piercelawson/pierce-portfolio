@@ -20,7 +20,7 @@ collections:
       - { label: "Year", name: "year", widget: "string", required: false }
       - { label: "Thumbnail", name: "thumbnail", widget: "image" }
       - { label: "Hero Image", name: "hero_image", widget: "image", required: false }
-      - { label: "Video Embed URL", name: "video_url", widget: "string", required: false, hint: "YouTube or Vimeo embed URL (used when Project Type is 'video')" }
+      - { label: "Video Embed URL", name: "video_url", widget: "string", required: false, hint: "Use embed format: https://www.youtube.com/embed/VIDEO_ID or https://player.vimeo.com/video/VIDEO_ID" }
       - label: "Hero Gallery"
         name: "gallery"
         widget: "list"

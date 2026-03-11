@@ -600,7 +600,7 @@ pageTitle: "{{ title }}"
 {% if project_type == "video" and video_url %}
 <div class="hero-media reveal">
   <div class="hero-video-wrap">
-    <iframe src="{{ video_url }}" allowfullscreen loading="lazy"></iframe>
+    <iframe src="{{ video_url }}" allowfullscreen loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin"></iframe>
   </div>
 </div>
 
@@ -652,7 +652,7 @@ pageTitle: "{{ title }}"
 {# Fallback: if project_type not set but video_url exists #}
 <div class="hero-media reveal">
   <div class="hero-video-wrap">
-    <iframe src="{{ video_url }}" allowfullscreen loading="lazy"></iframe>
+    <iframe src="{{ video_url }}" allowfullscreen loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin"></iframe>
   </div>
 </div>
 {% endif %}
